@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "656355959108",
+    "firebase_url": "https://wallet-manager-80444.firebaseio.com",
+    "project_id": "wallet-manager-80444",
+    "storage_bucket": "wallet-manager-80444.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656355959108:android:a1e7dad6e1223e54993711",
+        "android_client_info": {
+          "package_name": "wallet.freedom.max.unx.untitled2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656355959108-0v7u93mqvv6vk0b4hnkmilhtet811ba9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKC-xEacERWjOwxaZbzjm8W0Dp4YRHwBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656355959108-0v7u93mqvv6vk0b4hnkmilhtet811ba9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
