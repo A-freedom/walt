@@ -12,16 +12,16 @@ class FirebaseServices {
         listen: listen == null ? true : listen);
   }
 
-  Stream<Iterable<DocumentSnapshot>> customersStream() {
+  Stream<Iterable<DocumentSnapshot>> streamIterable({path}) {
     return userDb
-        .collection('users/${user.uid}/customers')
+        .collection('users/${user.uid}$path')
         .snapshots()
         .map((snapshot) => snapshot.documents.map((e) => e));
   }
 
-  Stream<DocumentSnapshot> customerStream(String customerId) {
+  Stream<DocumentSnapshot> streamDocumentSnapshot({path}) {
     return userDb
-        .document('users/${user.uid}/customers/$customerId')
+        .document('users/${user.uid}$path')
         .snapshots()
         .map((snapshot) => snapshot);
   }
@@ -40,10 +40,10 @@ class FirebaseServices {
     return customerDb.add(data);
   }
 
-  Future addTranslation({customerId, dateles}) {
+  Future addTranslation({customerId, data}) {
     return userDb
         .collection('users/${user.uid}/customers/$customerId/translations')
-        .add(dateles);
+        .add(data);
   }
 
   Stream<QuerySnapshot> get userStream {

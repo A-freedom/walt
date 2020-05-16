@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:untitled2/layout/main/addNewCustomer.dart';
-import 'package:untitled2/layout/main/drwar.dart';
+import 'package:untitled2/layout/main/drawer.dart';
 import 'package:untitled2/service/auth.dart';
 import 'package:untitled2/service/firebaseServices.dart';
 
@@ -21,7 +21,7 @@ class _MainState extends State<Main> {
         key: scaffoldKey,
         drawer: DrawerWidget(),
         body: StreamBuilder<Iterable>(
-            stream: FirebaseServices(context: context).customersStream(),
+            stream: FirebaseServices(context: context).streamIterable(path: '/customers'),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListView(
@@ -72,6 +72,7 @@ class _MainState extends State<Main> {
 
 
 
+// ignore: must_be_immutable
 class ListItem extends StatelessWidget {
   DocumentSnapshot customerDoc ;
   ListItem({this.customerDoc});
@@ -93,10 +94,10 @@ class ListItem extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        Navigator.pushNamed(context, '/userViewer',arguments: {'customerDoc':customerDoc});
+        Navigator.pushNamed(context, '/customerViewer',arguments: {'_customerDoc':customerDoc});
       },
       onLongPress: () {
-        Navigator.pushNamed(context, '/userViewer');
+        Navigator.pushNamed(context, '/customerViewer');
       },
     );
   }

@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/service/firebaseServices.dart';
 
+// ignore: must_be_immutable
 class AddNewCustomer extends StatelessWidget {
   var user, fullname, location;
 
@@ -49,7 +49,7 @@ class AddNewCustomer extends StatelessWidget {
               'location': this.location,
               'exp': DateTime.now(),
               'total': 0,
-            });
+            }).then((value) => Navigator.pop(context));
           },
         )
       ],
