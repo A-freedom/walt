@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled2/modules/customer.dart';
 
 class FirebaseServices {
   final userDb = Firestore.instance;
@@ -13,18 +12,18 @@ class FirebaseServices {
         listen: listen == null ? true : listen);
   }
 
-  Stream<Customers> customersStream() {
+  Stream<Iterable<DocumentSnapshot>> customersStream() {
     return userDb
         .collection('users/${user.uid}/customers')
         .snapshots()
-        .map((snapshot) => Customers(snapshot));
+        .map((snapshot) => snapshot.documents.map((e) => e));
   }
 
-  Stream<Customer> customerStream(String customerId) {
+  Stream<DocumentSnapshot> customerStream(String customerId) {
     return userDb
         .document('users/${user.uid}/customers/$customerId')
         .snapshots()
-        .map((snapshot) => Customer(snapshot));
+        .map((snapshot) => snapshot);
   }
 
   // ignore: non_constant_identifier_names

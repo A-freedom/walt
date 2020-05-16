@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled2/modules/customer.dart';
 import 'package:untitled2/service/firebaseServices.dart';
 
 class CustomerViewer extends StatefulWidget {
@@ -12,7 +12,7 @@ class _CustomerViewerState extends State<CustomerViewer> {
   @override
   Widget build(BuildContext context) {
     Map arguments = ModalRoute.of(context).settings.arguments;
-    Customer customer = arguments['customer'];
+    Map customer = arguments['customer'];
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
@@ -50,19 +50,22 @@ class _CustomerViewerState extends State<CustomerViewer> {
 class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     Map arguments = ModalRoute.of(context).settings.arguments;
-    String customerId = arguments['customer'].customerId;
+    DocumentSnapshot customerDoc = arguments['customerDoc'];
+    String customerId = customerDoc.documentID ;
+
     final goldenWeight = (MediaQuery.of(context).size.width / 1.68);
-    var textStyle1 = Theme.of(context).textTheme.title;
+    var textStyle1 = Theme.of(context).textTheme.subtitle1;
     var textStyle2 = Theme.of(context).textTheme.overline;
     return Container(
         padding: EdgeInsets.all(8),
-        child: StreamBuilder<Customer>(
+        child: StreamBuilder<DocumentSnapshot>(
             stream:
                 FirebaseServices(context: context).customerStream(customerId),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                Customer customer = snapshot.data;
+                Map customer = snapshot.data.data;
                 return Row(
                   children: <Widget>[
                     Expanded(
@@ -74,7 +77,7 @@ class Header extends StatelessWidget {
                             child: Hero(
                                 child: CircleAvatar(
                                     backgroundImage:
-                                        AssetImage('assets/pro.jpeg'),
+                                        AssetImage(''),
                                     child: Icon(
                                       Icons.warning,
 //                                    color: Colors.amber,
@@ -102,7 +105,7 @@ class Header extends StatelessWidget {
                               style: textStyle2,
                             ),
                             Text(
-                              customer.user,
+                              customer['user'].toString(),
                               style: textStyle1,
                             ),
                             SizedBox(
@@ -112,7 +115,7 @@ class Header extends StatelessWidget {
                               'NAME',
                               style: textStyle2,
                             ),
-                            Text(customer.fullname, style: textStyle1),
+                            Text(customer['fullname'].toString(), style: textStyle1),
                             SizedBox(
                               height: 5,
                             ),
@@ -120,7 +123,7 @@ class Header extends StatelessWidget {
                               'EXP',
                               style: textStyle2,
                             ),
-                            Text(customer.exp, style: textStyle1),
+                            Text(customer['exp'].toDate().toString(), style: textStyle1),
                           ],
                         ),
                       ),
@@ -148,7 +151,7 @@ class Tran extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             '50',
-            style: Theme.of(context).textTheme.title,
+            style: Theme.of(context).textTheme.subtitle1,
           ),
         ),
         subtitle: Padding(

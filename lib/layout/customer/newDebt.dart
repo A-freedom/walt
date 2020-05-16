@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:untitled2/modules/customer.dart';
 
 class NewDebt extends StatefulWidget {
   @override
