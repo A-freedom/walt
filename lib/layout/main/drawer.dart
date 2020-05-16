@@ -9,7 +9,7 @@ class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final goldenWeight = (MediaQuery.of(context).size.width / 1.68);
-    var textStyle1 = Theme.of(context).textTheme.title;
+    var textStyle1 = Theme.of(context).textTheme.headline5;
     var textStyle2 = Theme.of(context).textTheme.overline;
     return Container(
       width: MediaQuery.of(context).size.width / 1.3,
